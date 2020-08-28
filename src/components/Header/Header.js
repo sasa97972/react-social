@@ -9,6 +9,8 @@ import {
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import Menu from './Menu/Menu';
+import clsx from 'clsx';
+import { menuWidth } from './config';
 
 const useStyles = makeStyles((theme) => ({
   menuButton: {
@@ -16,6 +18,24 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
+  },
+  hide: {
+    display: 'none',
+  },
+  appBar: {
+    zIndex: theme.zIndex.drawer + 1,
+    transition: theme.transitions.create(['width', 'margin'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+  },
+  appBarShift: {
+    marginLeft: menuWidth,
+    width: `calc(100% - ${menuWidth}px)`,
+    transition: theme.transitions.create(['width', 'margin'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
   },
 }));
 
@@ -33,14 +53,21 @@ const Header = () => {
 
   return (
     <>
-      <AppBar position="fixed">
+      <AppBar
+        position="fixed"
+        className={clsx(classes.appBar, {
+          [classes.appBarShift]: open,
+        })}
+      >
         <Toolbar>
           <IconButton
             color="inherit"
             aria-label="open drawer"
             onClick={handleMenuOpen}
             edge="start"
-            className={classes.menuButton}
+            className={clsx(classes.menuButton, {
+              [classes.hide]: open,
+            })}
           >
             <MenuIcon />
           </IconButton>
@@ -50,7 +77,7 @@ const Header = () => {
           <Button color="inherit">Login</Button>
         </Toolbar>
       </AppBar>
-
+      <Toolbar />
       <Menu onClose={handleMenuClose} open={open} />
     </>
   );

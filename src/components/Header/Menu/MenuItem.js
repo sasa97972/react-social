@@ -1,13 +1,14 @@
 import React from 'react';
 import { ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
-import MailIcon from '@material-ui/icons/Mail';
 
-const MenuItem = ({ text }) => {
+const MenuItem = ({ text, Icon, selected }) => {
   return (
-    <ListItem button>
-      <ListItemIcon>
-        <MailIcon />
-      </ListItemIcon>
+    <ListItem button selected={selected}>
+      {Icon && (
+        <ListItemIcon>
+          <Icon color={selected ? 'primary' : 'inherit'} />
+        </ListItemIcon>
+      )}
       <ListItemText primary={text} />
     </ListItem>
   );
