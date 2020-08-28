@@ -22,7 +22,7 @@ const Post = ({ name, text, date }) => {
   const classes = useStyles();
 
   return (
-    <Card className={classes.card}>
+    <Card className={classes.card} variant="outlined">
       <CardHeader
         avatar={<Avatar className={classes.avatar}>OD</Avatar>}
         title={name}

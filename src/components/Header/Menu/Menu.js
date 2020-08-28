@@ -1,9 +1,10 @@
 import React from 'react';
-import { Drawer, List, makeStyles, IconButton } from '@material-ui/core';
-import MenuItem from './MenuItem';
 import clsx from 'clsx';
-import { menuWidth, menuItems } from '../config';
+import { Drawer, List, makeStyles, IconButton } from '@material-ui/core';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import { useLocation } from 'react-router-dom';
+import { menuWidth, menuItems } from '../config';
+import MenuItem from './MenuItem';
 
 const useStyles = makeStyles((theme) => ({
   list: {
@@ -39,9 +40,16 @@ const useStyles = makeStyles((theme) => ({
 
 const Menu = ({ open, onClose }) => {
   const classes = useStyles();
+  const { pathname } = useLocation();
 
-  const MenuItems = menuItems.map(({ name, icon }, index) => (
-    <MenuItem text={name} Icon={icon} selected={index === 0} key={index} />
+  const MenuItems = menuItems.map(({ href, name, Icon }, index) => (
+    <MenuItem
+      key={index}
+      selected={href === pathname}
+      href={href}
+      Icon={Icon}
+      name={name}
+    />
   ));
 
   return (

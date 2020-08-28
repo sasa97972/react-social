@@ -9,22 +9,24 @@ export const menuWidth = 270;
 export const menuItems = [
   {
     name: 'Profile',
-    icon: HomeIcon,
+    Icon: HomeIcon,
+    href: '/',
   },
   {
     name: 'Messages',
-    icon: MailIcon,
+    Icon: MailIcon,
+    href: '/dialogs',
   },
   {
     name: 'News',
-    icon: NewsIcon,
+    Icon: NewsIcon,
   },
   {
     name: 'Music',
-    icon: MusicIcon,
+    Icon: MusicIcon,
   },
   {
     name: 'Settings',
-    icon: SettingsIcon,
+    Icon: SettingsIcon,
   },
 ];
