@@ -1,5 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
+import PropTypes from 'prop-types';
 import { Drawer, List, makeStyles, IconButton } from '@material-ui/core';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { useLocation } from 'react-router-dom';
@@ -42,14 +43,8 @@ const Menu = ({ open, onClose }) => {
   const classes = useStyles();
   const { pathname } = useLocation();
 
-  const MenuItems = menuItems.map(({ href, name, Icon }, index) => (
-    <MenuItem
-      key={index}
-      selected={href === pathname}
-      href={href}
-      Icon={Icon}
-      name={name}
-    />
+  const MenuItems = menuItems.map(({ href, ...props }, index) => (
+    <MenuItem key={index} selected={href === pathname} href={href} {...props} />
   ));
 
   return (
@@ -74,6 +69,11 @@ const Menu = ({ open, onClose }) => {
       <List className={classes.list}>{MenuItems}</List>
     </Drawer>
   );
+};
+
+Menu.propTypes = {
+  open: PropTypes.bool,
+  onClose: PropTypes.func,
 };
 
 export default Menu;

@@ -20,13 +20,16 @@ export const menuItems = [
   {
     name: 'News',
     Icon: NewsIcon,
+    href: '#',
   },
   {
     name: 'Music',
     Icon: MusicIcon,
+    href: '#',
   },
   {
     name: 'Settings',
     Icon: SettingsIcon,
+    href: '#',
   },
 ];

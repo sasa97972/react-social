@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   Typography,
   Avatar,
@@ -35,6 +36,12 @@ const Post = ({ name, text, date }) => {
       </CardContent>
     </Card>
   );
+};
+
+Post.propTypes = {
+  name: PropTypes.string,
+  text: PropTypes.string,
+  date: PropTypes.string,
 };
 
 export default Post;

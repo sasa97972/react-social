@@ -11,6 +11,10 @@ const useStyles = makeStyles((theme) => ({
   title: {
     marginLeft: theme.spacing(2),
   },
+  avatar: {
+    width: theme.spacing(7),
+    height: theme.spacing(7),
+  },
 }));
 
 const ProfileHeader = () => {
@@ -19,6 +23,7 @@ const ProfileHeader = () => {
   return (
     <Box className={classes.header}>
       <Avatar
+        className={classes.avatar}
         alt="Oleksandr Dulia"
         src="https://material-ui.com/static/images/avatar/1.jpg"
       />
