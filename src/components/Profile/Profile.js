@@ -24,7 +24,7 @@ const Profile = () => {
       <Card>
         <CardMedia
           className={classes.media}
-          image="https://www.iphones.ru/wp-content/uploads/2018/07/55BA2802-3DA6-417F-9604-EC147507B547.jpeg"
+          image="https://7oom.ru/wp-content/uploads/peizaji-01.jpg"
           title="Background Image"
         />
         <CardContent>
