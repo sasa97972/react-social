@@ -1,4 +1,5 @@
 import React from 'react';
+import { Route } from 'react-router-dom';
 import {
   makeStyles,
   Typography,
@@ -24,7 +25,6 @@ const useStyles = makeStyles((theme) => ({
 
 const Dialogs = () => {
   const classes = useStyles();
-  const currentUser = 'User Name 1';
 
   return (
     <Container className={classes.wrapper}>
@@ -39,9 +39,11 @@ const Dialogs = () => {
           </Paper>
         </Grid>
         <Grid item xs={6}>
-          <Paper className={classes.paper}>
-            <Messages userName={currentUser} />
-          </Paper>
+          <Route path="/dialogs/:dialogId">
+            <Paper className={classes.paper}>
+              <Messages />
+            </Paper>
+          </Route>
         </Grid>
       </Grid>
     </Container>

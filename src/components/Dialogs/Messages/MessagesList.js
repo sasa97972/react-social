@@ -1,34 +1,7 @@
 import React from 'react';
-import { Box, makeStyles } from '@material-ui/core';
+import PropTypes from 'prop-types';
+import { Box, makeStyles, Typography } from '@material-ui/core';
 import MessagesListItem from './MessagesListItem';
-
-const messages = [
-  {
-    id: 1,
-    type: 'question',
-    text: 'Adagsh bahj agsd hjagh gashj gahjsg hasg dhjagsdhags das',
-  },
-  {
-    id: 2,
-    type: 'answer',
-    text: 'Adagsh bahj agsd hjagh gashj gahjsg hasg dhjagsdhags das',
-  },
-  {
-    id: 3,
-    type: 'answer',
-    text: 'Adagsh bahj agsd hjagh gashj gahjsg hasg dhjagsdhags das',
-  },
-  {
-    id: 4,
-    type: 'question',
-    text: 'Adagsh bahj agsd hjagh gashj gahjsg hasg dhjagsdhags das',
-  },
-  {
-    id: 5,
-    type: 'question',
-    text: 'Adagsh bahj agsd hjagh gashj gahjsg hasg dhjagsdhags das',
-  },
-];
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -38,14 +11,25 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const MessagesList = () => {
+const MessagesList = ({ messages }) => {
   const classes = useStyles();
 
-  const Messages = messages.map(({ id, ...message }) => (
-    <MessagesListItem key={id} {...message} />
-  ));
+  const Messages =
+    messages && messages.length ? (
+      messages.map(({ id, ...message }) => (
+        <MessagesListItem key={id} {...message} />
+      ))
+    ) : (
+      <Typography variant="body1" component="p">
+        There are no messages
+      </Typography>
+    );
 
   return <Box className={classes.container}>{Messages}</Box>;
+};
+
+MessagesList.propTypes = {
+  messages: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default MessagesList;

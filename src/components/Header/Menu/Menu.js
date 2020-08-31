@@ -47,7 +47,9 @@ const Menu = ({ open, onClose }) => {
   const MenuItems = routes.map(({ path: href, name, Icon }, index) => (
     <MenuItem
       key={index}
-      selected={href === pathname}
+      selected={
+        pathname === href || pathname.match(new RegExp(`${href}/.+`)) !== null
+      }
       href={href}
       name={name}
       Icon={Icon}

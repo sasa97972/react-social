@@ -6,8 +6,8 @@ import classes from './Routing.module.scss';
 
 const Routing = () => {
   const ref = React.createRef();
-  const Routes = routes.map(({ path, Component }) => (
-    <Route key={path} path={path} exact>
+  const Routes = routes.map(({ path, Component, exact }) => (
+    <Route key={path} path={path} exact={exact}>
       <CSSTransition
         in
         appear

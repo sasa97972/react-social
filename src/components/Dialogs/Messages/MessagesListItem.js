@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
   messageAnswer: {
     alignSelf: 'flex-end',
     backgroundColor: theme.palette.info.light,
-    borderRadius: '10px 10px 0 10px',
+    borderRadius: '15px 15px 0 15px',
 
     '& + &': {
       marginTop: theme.spacing(1),
@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   messageQuestion: {
     alignSelf: 'flex-start',
     backgroundColor: grey[100],
-    borderRadius: '10px 10px 10px 0',
+    borderRadius: '15px 15px 15px 0',
 
     '& + &': {
       marginTop: theme.spacing(1),
