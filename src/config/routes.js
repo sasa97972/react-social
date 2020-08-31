@@ -6,6 +6,9 @@ import SettingsIcon from '@material-ui/icons/Settings';
 
 import Profile from '../components/Profile/Profile';
 import Dialogs from '../components/Dialogs/Dialogs';
+import Music from '../components/Music/Music';
+import News from '../components/News/News';
+import Settings from '../components/Settings/Settings';
 
 export const routes = [
   {
@@ -22,20 +25,20 @@ export const routes = [
   },
   {
     name: 'News',
-    path: null,
-    Component: null,
+    path: '/news',
+    Component: News,
     Icon: NewsIcon,
   },
   {
     name: 'Music',
-    path: null,
-    Component: null,
+    path: '/music',
+    Component: Music,
     Icon: MusicIcon,
   },
   {
     name: 'Settings',
-    path: null,
-    Component: null,
+    path: '/settings',
+    Component: Settings,
     Icon: SettingsIcon,
   },
 ];

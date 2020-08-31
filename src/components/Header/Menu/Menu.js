@@ -73,7 +73,9 @@ const Menu = ({ open, onClose }) => {
           <ChevronLeftIcon />
         </IconButton>
       </div>
-      <List className={classes.list}>{MenuItems}</List>
+      <List className={classes.list} component="nav">
+        {MenuItems}
+      </List>
     </Drawer>
   );
 };
