@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 import { Drawer, List, makeStyles, IconButton } from '@material-ui/core';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { useLocation } from 'react-router-dom';
-import { menuWidth, menuItems } from '../config';
+import { menuWidth } from '../config';
+import { routes } from '../../../config/routes';
 import MenuItem from './MenuItem';
 
 const useStyles = makeStyles((theme) => ({
@@ -43,8 +44,14 @@ const Menu = ({ open, onClose }) => {
   const classes = useStyles();
   const { pathname } = useLocation();
 
-  const MenuItems = menuItems.map(({ href, ...props }, index) => (
-    <MenuItem key={index} selected={href === pathname} href={href} {...props} />
+  const MenuItems = routes.map(({ path: href, name, Icon }, index) => (
+    <MenuItem
+      key={index}
+      selected={href === pathname}
+      href={href}
+      name={name}
+      Icon={Icon}
+    />
   ));
 
   return (
@@ -72,8 +79,8 @@ const Menu = ({ open, onClose }) => {
 };
 
 Menu.propTypes = {
-  open: PropTypes.bool,
-  onClose: PropTypes.func,
+  open: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
 };
 
 export default Menu;

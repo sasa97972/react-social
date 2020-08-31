@@ -1,59 +1,32 @@
 import React from 'react';
-import { Switch, Route, useLocation } from 'react-router-dom';
-import { TransitionGroup, CSSTransition } from 'react-transition-group';
-import Profile from '../Profile/Profile';
-import Dialogs from '../Dialogs/Dialogs';
+import { Switch, Route } from 'react-router-dom';
+import { routes } from '../../config/routes';
+import { CSSTransition } from 'react-transition-group';
 import classes from './Routing.module.scss';
 
 const Routing = () => {
-  const location = useLocation();
+  const ref = React.createRef();
+  const Routes = routes.map(({ path, Component }) => (
+    <Route key={path} path={path} exact>
+      <CSSTransition
+        in
+        appear
+        timeout={500}
+        classNames={{
+          appearActive: classes['fade-appear-active'],
+          appearDone: classes['fade-enter-done'],
+        }}
+        nodeRef={ref}
+        unmountOnExit
+      >
+        <div ref={ref} className={classes.fade}>
+          {Component && <Component />}
+        </div>
+      </CSSTransition>
+    </Route>
+  ));
 
-  return (
-    <Switch location={location}>
-      <Route path="/" exact>
-        {(match) => {
-          return (
-            <CSSTransition
-              classNames={{
-                enter: classes['fade-enter'],
-                enterActive: classes['fade-enter-active'],
-                exit: classes['fade-exit'],
-                exitActive: classes['fade-exit-active'],
-              }}
-              timeout={{ enter: 5000, exit: 0 }}
-              in
-              unmountOnExit
-            >
-              <div>
-                <Profile />
-              </div>
-            </CSSTransition>
-          );
-        }}
-      </Route>
-      <Route path="/dialogs" exact>
-        {(match) => {
-          return (
-            <CSSTransition
-              classNames={{
-                enter: classes['fade-enter'],
-                enterActive: classes['fade-enter-active'],
-                exit: classes['fade-exit'],
-                exitActive: classes['fade-exit-active'],
-              }}
-              timeout={{ enter: 5000, exit: 0 }}
-              in
-              unmountOnExit
-            >
-              <div>
-                <Dialogs />
-              </div>
-            </CSSTransition>
-          );
-        }}
-      </Route>
-    </Switch>
-  );
+  return <Switch>{Routes}</Switch>;
 };
 
 export default Routing;

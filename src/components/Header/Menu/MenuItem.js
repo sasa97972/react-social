@@ -25,10 +25,10 @@ const MenuItem = ({ name, Icon, href, selected }) => {
 };
 
 MenuItem.propTypes = {
-  name: PropTypes.string,
+  name: PropTypes.string.isRequired,
   Icon: PropTypes.object,
   href: PropTypes.string,
-  selected: PropTypes.bool,
+  selected: PropTypes.bool.isRequired,
 };
 
 export default MenuItem;
