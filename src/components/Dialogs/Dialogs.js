@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, useRouteMatch } from 'react-router-dom';
 import {
   makeStyles,
   Typography,
@@ -25,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Dialogs = () => {
   const classes = useStyles();
+  const { url } = useRouteMatch();
 
   return (
     <Container className={classes.wrapper}>
@@ -39,7 +40,7 @@ const Dialogs = () => {
           </Paper>
         </Grid>
         <Grid item xs={6}>
-          <Route path="/dialogs/:dialogId">
+          <Route path={`${url}/:dialogId`}>
             <Paper className={classes.paper}>
               <Messages />
             </Paper>
