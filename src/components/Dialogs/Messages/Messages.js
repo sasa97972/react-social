@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Divider, makeStyles, Typography } from '@material-ui/core';
 import MessagesList from './MessagesList';
 import { useParams } from 'react-router-dom';
+import { CSSTransition } from 'react-transition-group';
 
 const messages = [
   {
@@ -45,15 +46,24 @@ const useStyles = makeStyles((theme) => ({
 
 const Messages = () => {
   const classes = useStyles();
+  const [activeDialog, setActiveDialog] = useState(null);
   const { dialogId } = useParams();
 
   return (
     <>
-      <Typography variant="body1" component="h2" className={classes.header}>
-        Dialog with {dialogId}
-      </Typography>
-      <Divider />
-      <MessagesList messages={Number(dialogId) === 1 ? messages : []} />
+      <CSSTransition
+        in={Number(dialogId) === 1}
+        timeout={500}
+        classNames="test"
+      >
+        <div>
+          <Typography variant="body1" component="h2" className={classes.header}>
+            Dialog with {activeDialog}
+          </Typography>
+          <Divider />
+          <MessagesList messages={Number(dialogId) === 1 ? messages : []} />
+        </div>
+      </CSSTransition>
     </>
   );
 };
