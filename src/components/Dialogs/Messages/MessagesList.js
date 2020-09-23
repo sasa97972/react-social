@@ -7,7 +7,6 @@ const useStyles = makeStyles((theme) => ({
   container: {
     display: 'flex',
     flexFlow: 'column nowrap',
-    marginTop: theme.spacing(1),
   },
 }));
 

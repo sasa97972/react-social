@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Divider, makeStyles, Typography } from '@material-ui/core';
+import { Skeleton } from '@material-ui/lab';
 import MessagesList from './MessagesList';
 import { useParams } from 'react-router-dom';
-import { CSSTransition } from 'react-transition-group';
 
-const messages = [
+const fetchedMessages = [
   {
     id: 1,
     type: 'question',
@@ -42,28 +42,50 @@ const useStyles = makeStyles((theme) => ({
   header: {
     marginBottom: theme.spacing(1),
   },
+  divider: {
+    marginBottom: theme.spacing(1),
+  },
 }));
 
 const Messages = () => {
   const classes = useStyles();
-  const [activeDialog, setActiveDialog] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [messages, setMessages] = useState([]);
   const { dialogId } = useParams();
+
+  useEffect(() => {
+    setLoading(true);
+    downloadMessages(dialogId).then((messages) => {
+      setMessages(messages);
+      setLoading(false);
+    });
+  }, [dialogId]);
+
+  const downloadMessages = async (dialogId) => {
+    function fetchData() {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve(Number(dialogId) === 2 ? fetchedMessages : []);
+        }, 1500);
+      });
+    }
+    const messages = await fetchData();
+    return messages;
+  };
 
   return (
     <>
-      <CSSTransition
-        in={Number(dialogId) === 1}
-        timeout={500}
-        classNames="test"
-      >
-        <div>
-          <Typography variant="body1" component="h2" className={classes.header}>
-            Dialog with {activeDialog}
-          </Typography>
-          <Divider />
-          <MessagesList messages={Number(dialogId) === 1 ? messages : []} />
-        </div>
-      </CSSTransition>
+      <div>
+        <Typography variant="body1" component="h2" className={classes.header}>
+          Dialog with User Name {dialogId}
+        </Typography>
+        <Divider className={classes.divider} />
+        {loading ? (
+          <Skeleton variant="rect" height={250} />
+        ) : (
+          <MessagesList messages={messages} />
+        )}
+      </div>
     </>
   );
 };
